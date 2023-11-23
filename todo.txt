@@ -1,0 +1,9 @@
+MAIN PRIORITY
+```
+[X] FCFS
+[X] SSTF
+[X] SCAN
+[ ] CSCAN
+[ ] LOOK
+[ ] CLOOK
+```
