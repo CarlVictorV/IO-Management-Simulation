@@ -17,8 +17,6 @@ class IO_Algorithm:
         """
         self.io_request = io_request
         self.io_execution = IO_Execution(self.io_request.current_track)
-        self.Queue = self.io_request.requested_tracks.copy()
-        self.simulate()
 
     def simulate(self):
         """
@@ -45,6 +43,7 @@ class IO_Algorithm:
         Simulates the FCFS Algorithm
         :return: None
         """
+        self.Queue = self.io_request.requested_tracks.copy()
         while (len(self.Queue) > 0):
             self.io_execution.add_head_movement(self.Queue.pop(0))
 
@@ -55,6 +54,7 @@ class IO_Algorithm:
         Simulates the SSTF Algorithm
         :return: None
         """
+        self.Queue = self.io_request.requested_tracks.copy()
         while (len(self.Queue) > 0):
             min_distance = self.io_request.disk_size + 1
             min_index = -1
@@ -72,6 +72,7 @@ class IO_Algorithm:
         Simulates the SCAN Algorithm
         :return: None
         """
+        self.Queue = self.io_request.requested_tracks.copy()
         self.Queue.append(self.io_request.disk_size - 1)
         current_track = self.io_request.current_track
         highest_track = max(self.Queue)
@@ -99,6 +100,7 @@ class IO_Algorithm:
         Simulates the C-SCAN Algorithm
         :return: None
         """
+        self.Queue = self.io_request.requested_tracks.copy()
         self.Queue.append(self.io_request.disk_size - 1)
         self.Queue.append(0)
         current_track = self.io_request.current_track
@@ -127,6 +129,7 @@ class IO_Algorithm:
         Simulates the LOOK Algorithm
         :return: None
         """
+        self.Queue = self.io_request.requested_tracks.copy()
         current_track = self.io_request.current_track
         highest_track = max(self.Queue)
         lowest_track = min(self.Queue)
@@ -153,6 +156,7 @@ class IO_Algorithm:
         Simulates the C-LOOK Algorithm
         :return: None
         """
+        self.Queue = self.io_request.requested_tracks.copy()
         current_track = self.io_request.current_track
         highest_track = max(self.Queue)
         lowest_track = min(self.Queue)
@@ -180,11 +184,10 @@ class IO_Algorithm:
         :return: None
         """
         self.io_execution.print()
-
         plt.plot(self.io_execution.head_movement_sequence,
                  marker='o', linestyle='--', color='r')
 
-        plt.ylabel('Track Number' , fontweight='bold')
+        plt.ylabel('Track Number', fontweight='bold')
         # plt.xlabel('Time')
         plt.xlabel(f'Total Head Movement = {self.io_execution.total_head_movements}', fontweight='bold')
         plt.title(f'Graph of {self.io_request.algorithm} Algorithm',  fontweight='bold',  loc='center')
@@ -195,33 +198,24 @@ class IO_Algorithm:
                 i, self.io_execution.head_movement_sequence[i]))
         plt.xticks(range(len(self.io_execution.head_movement_sequence)))
 
-        
         plt.show()
+        self.reset_execution()
+            
 
-
-def main():
-    """
-    Main Function
-    :return: None
-    """
-    io_request = IO_Request()
-
-    # Ask if the user wants to read the input from a file or take the input from the user
-    # choice = input(
-    #     'Do you want to read the input from a file? (y/n): ').strip().lower()
-    # if (choice == 'y'):
-    #     if os.name != 'nt':
-    #         io_request.read_input(r"src/input.txt")
-    #     else:
-    #         io_request.read_input(r'src\input.txt')
-    # else:
-    #     io_request.take_input()
-
-    io_request.read_input(r'src\input.txt')
-    io_request.print_input()
-
-    io_algorithm = IO_Algorithm(io_request)
-
-
-if __name__ == '__main__':
-    main()
+    def set_algorithm(self, algorithm):
+        """
+        Sets the algorithm to be used for the simulation
+        :param algorithm: The algorithm to be used for the simulation
+        :return: None
+        """
+        self.io_request.algorithm = algorithm
+    
+    def reset_execution(self):
+        """
+        Resets the execution
+        :return: None
+        """
+        self.io_execution.head_movement_sequence = []
+        self.io_execution.head_movement_sequence.append(self.io_request.current_track)
+        self.io_execution.total_head_movements = 0
+        

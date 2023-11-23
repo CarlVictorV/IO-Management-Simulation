@@ -43,14 +43,13 @@ class IO_Execution:
         Prints the graph of the head movement sequence
         :return: None
         """
-        print()
-        print('Head Movement Sequence:')
-        print('------------------------------------')
         for i in range(len(self.head_movement_sequence)):
             print('Track', i, ':', self.head_movement_sequence[i])
         print('------------------------------------')
         print('Total Head Movements:', self.total_head_movements)
-        print()
+        print('------------------------------------')
+
+
 
 
 def test():

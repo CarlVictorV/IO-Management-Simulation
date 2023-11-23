@@ -10,7 +10,7 @@ MAIN PRIORITY
 SECONDARY PRIORITY
 ```
 [X] Windows Support
-[] Mac Support
+[X] Mac Support
 [X] with Graph 
 [] Menu Driven
 ```
