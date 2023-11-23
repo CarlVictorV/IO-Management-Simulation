@@ -69,6 +69,14 @@ class IO_Request:
         print(f'Current Track: {self.current_track}')
         print(f'Algorithm: {self.algorithm}')
 
+    def set_algorithm(self, algorithm):
+        """
+        Sets the algorithm to be used for the simulation
+        :param algorithm: The algorithm to be used for the simulation
+        :return: None
+        """
+        self.algorithm = algorithm
+
 
 def test():
     """

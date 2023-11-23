@@ -1,6 +1,9 @@
 from execution import IO_Execution
 from request import IO_Request
 
+import matplotlib.pyplot as plt
+import os
+
 
 class IO_Algorithm:
     """
@@ -45,10 +48,7 @@ class IO_Algorithm:
         while (len(self.Queue) > 0):
             self.io_execution.add_head_movement(self.Queue.pop(0))
 
-        print()
-        print('Head Movement Sequence:',
-              self.io_execution.head_movement_sequence)
-        print('Total Head Movements:', self.io_execution.total_head_movements)
+        self.print_graph_gui()
 
     def sstf(self):
         """
@@ -65,10 +65,7 @@ class IO_Algorithm:
                     min_index = i
             self.io_execution.add_head_movement(self.Queue.pop(min_index))
 
-        print()
-        print('Head Movement Sequence:',
-              self.io_execution.head_movement_sequence)
-        print('Total Head Movements:', self.io_execution.total_head_movements)
+        self.print_graph_gui()
 
     def scan(self):
         """
@@ -95,10 +92,7 @@ class IO_Algorithm:
                 self.Queue.remove(current_track)
             current_track -= 1
 
-        print()
-        print('Head Movement Sequence:',
-              self.io_execution.head_movement_sequence)
-        print('Total Head Movements:', self.io_execution.total_head_movements)
+        self.print_graph_gui()
 
     def cscan(self):
         """
@@ -126,10 +120,7 @@ class IO_Algorithm:
                 self.Queue.remove(current_track)
             current_track += 1
 
-        print()
-        print('Head Movement Sequence:',
-              self.io_execution.head_movement_sequence)
-        print('Total Head Movements:', self.io_execution.total_head_movements)
+        self.print_graph_gui()
 
     def look(self):
         """
@@ -155,10 +146,7 @@ class IO_Algorithm:
                 self.Queue.remove(current_track)
             current_track -= 1
 
-        print()
-        print('Head Movement Sequence:',
-              self.io_execution.head_movement_sequence)
-        print('Total Head Movements:', self.io_execution.total_head_movements)
+        self.print_graph_gui()
 
     def clook(self):
         """
@@ -184,10 +172,31 @@ class IO_Algorithm:
                 self.Queue.remove(current_track)
             current_track += 1
 
-        print()
-        print('Head Movement Sequence:',
-              self.io_execution.head_movement_sequence)
-        print('Total Head Movements:', self.io_execution.total_head_movements)
+        self.print_graph_gui()
+
+    def print_graph_gui(self):
+        """
+        Prints the graph of the head movement sequence
+        :return: None
+        """
+        self.io_execution.print()
+
+        plt.plot(self.io_execution.head_movement_sequence,
+                 marker='o', linestyle='--', color='r')
+
+        plt.ylabel('Track Number' , fontweight='bold')
+        # plt.xlabel('Time')
+        plt.xlabel(f'Total Head Movement = {self.io_execution.total_head_movements}', fontweight='bold')
+        plt.title(f'Graph of {self.io_request.algorithm} Algorithm',  fontweight='bold',  loc='center')
+        plt.grid(True)
+        plt.ylim(0, self.io_request.disk_size)
+        for i in range(len(self.io_execution.head_movement_sequence)):
+            plt.annotate(self.io_execution.head_movement_sequence[i], (
+                i, self.io_execution.head_movement_sequence[i]))
+        plt.xticks(range(len(self.io_execution.head_movement_sequence)))
+
+        
+        plt.show()
 
 
 def main():
@@ -196,8 +205,19 @@ def main():
     :return: None
     """
     io_request = IO_Request()
-    io_request.read_input('src\input.txt')
-    # io_request.take_input()
+
+    # Ask if the user wants to read the input from a file or take the input from the user
+    # choice = input(
+    #     'Do you want to read the input from a file? (y/n): ').strip().lower()
+    # if (choice == 'y'):
+    #     if os.name != 'nt':
+    #         io_request.read_input(r"src/input.txt")
+    #     else:
+    #         io_request.read_input(r'src\input.txt')
+    # else:
+    #     io_request.take_input()
+
+    io_request.read_input(r'src\input.txt')
     io_request.print_input()
 
     io_algorithm = IO_Algorithm(io_request)
