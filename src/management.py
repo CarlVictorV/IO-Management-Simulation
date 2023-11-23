@@ -43,9 +43,9 @@ class IO_Algorithm:
         Simulates the FCFS Algorithm
         :return: None
         """
-        self.Queue = self.io_request.requested_tracks.copy()
-        while (len(self.Queue) > 0):
-            self.io_execution.add_head_movement(self.Queue.pop(0))
+        
+        for track in self.io_request.requested_tracks:
+            self.io_execution.add_head_movement(track)
 
         self.print_graph_gui()
 
@@ -218,4 +218,5 @@ class IO_Algorithm:
         self.io_execution.head_movement_sequence = []
         self.io_execution.head_movement_sequence.append(self.io_request.current_track)
         self.io_execution.total_head_movements = 0
+        self.Queue = []
         
