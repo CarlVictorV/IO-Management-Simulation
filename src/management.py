@@ -75,6 +75,7 @@ class IO_Algorithm:
         Simulates the SCAN Algorithm
         :return: None
         """
+        self.Queue.append(self.io_request.disk_size - 1)
         current_track = self.io_request.current_track
         highest_track = max(self.Queue)
         lowest_track = min(self.Queue)
@@ -104,6 +105,8 @@ class IO_Algorithm:
         Simulates the C-SCAN Algorithm
         :return: None
         """
+        self.Queue.append(self.io_request.disk_size - 1)
+        self.Queue.append(0)
         current_track = self.io_request.current_track
         highest_track = max(self.Queue)
         lowest_track = min(self.Queue)
@@ -193,7 +196,7 @@ def main():
     :return: None
     """
     io_request = IO_Request()
-    io_request.read_input('OS\IOManagement\input.txt')
+    io_request.read_input('src\input.txt')
     # io_request.take_input()
     io_request.print_input()
 
