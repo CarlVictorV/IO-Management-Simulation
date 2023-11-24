@@ -12,11 +12,11 @@ SECONDARY PRIORITY
 [X] Windows Support
 [X] Mac Support
 [X] with Graph 
-[] Menu Driven
+[X] Menu Driven
 ```
 FINAL STEPS
 ```
-[] Verify
-[] Prepare Presentation
-[] Submit
+[X] Verify
+[X] Prepare Presentation
+[X] Submit
 ```

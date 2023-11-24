@@ -16,13 +16,14 @@ class IO_Algorithm:
         :param io_request: The IO_Request object containing the information about the IO Requests
         """
         self.io_request = io_request
-        self.io_execution = IO_Execution(self.io_request.current_track)
+        self.io_execution = IO_Execution()
 
     def simulate(self):
         """
         Simulates the IO Algorithm
         :return: None
         """
+        self.reset_execution()
         if (self.io_request.algorithm == 'FCFS'):
             self.fcfs()
         elif (self.io_request.algorithm == 'SSTF'):
@@ -199,7 +200,6 @@ class IO_Algorithm:
         plt.xticks(range(len(self.io_execution.head_movement_sequence)))
 
         plt.show()
-        self.reset_execution()
             
 
     def set_algorithm(self, algorithm):
@@ -219,4 +219,5 @@ class IO_Algorithm:
         self.io_execution.head_movement_sequence.append(self.io_request.current_track)
         self.io_execution.total_head_movements = 0
         self.Queue = []
+
         

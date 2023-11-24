@@ -76,21 +76,3 @@ class IO_Request:
         :return: None
         """
         self.algorithm = algorithm
-
-
-def test():
-    """
-    Tests the IO_Request class
-    :return: None
-    """
-    io_request = IO_Request()
-    io_request.read_input('OS\IOManagement\input.txt')
-    io_request.print_input()
-
-    io_request.take_input()
-    io_request.print_input()
-    print("Test Passed!")
-
-
-if __name__ == '__main__':
-    test()

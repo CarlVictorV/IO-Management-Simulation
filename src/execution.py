@@ -4,9 +4,8 @@ class IO_Execution:
     This Class is also used for useful calculations about the execution of the IO Requests
     """
 
-    def __init__(self, current_track):
+    def __init__(self):
         self.head_movement_sequence = []  # The sequence of the head movements
-        self.head_movement_sequence.append(current_track)
         self.total_head_movements = 0  # The total number of head movements
 
     def add_head_movement(self, head_movement):
@@ -48,33 +47,3 @@ class IO_Execution:
         print('------------------------------------')
         print('Total Head Movements:', self.total_head_movements)
         print('------------------------------------')
-
-
-
-
-def test():
-    """
-    Test function
-    :return: None
-    """
-
-    io_execution = IO_Execution(70)
-    io_execution.add_head_movement(118)
-    io_execution.add_head_movement(59)
-    io_execution.add_head_movement(110)
-    io_execution.add_head_movement(25)
-    io_execution.add_head_movement(105)
-    io_execution.add_head_movement(63)
-    io_execution.add_head_movement(100)
-    io_execution.add_head_movement(28)
-    io_execution.add_head_movement(80)
-
-    print()
-    print('Head Movement Sequence:', io_execution.head_movement_sequence)
-    print('Total Head Movements:', io_execution.total_head_movements)
-    print()
-    io_execution.print_graph_gui()
-
-
-if __name__ == '__main__':
-    test()
