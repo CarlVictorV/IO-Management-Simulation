@@ -42,8 +42,61 @@ class IO_Execution:
         Prints the graph of the head movement sequence
         :return: None
         """
+        print('Head Movement Sequence Graph')
+        print('------------------------------------')
         for i in range(len(self.head_movement_sequence)):
             print('Track', i, ':', self.head_movement_sequence[i])
         print('------------------------------------')
-        print('Total Head Movements:', self.total_head_movements)
+        self.print_calculation()
+
+    def print_calculation(self):
+        """
+        Prints the calculation of the head movement sequence
+        Basing from the ppt format
+        """
+
+        print('Head Movement Sequence Calculation')
         print('------------------------------------')
+        print('The Following are the number of tracks traversed by the read/write head:')
+        print()
+
+        list_of_calculation = []
+        i = 1
+        while i < len(self.head_movement_sequence):
+            diff = abs(
+                self.head_movement_sequence[i] - self.head_movement_sequence[i - 1])
+            list_of_calculation.append(diff)
+            # Fixed width for alignment
+            from_track = f"Track {self.head_movement_sequence[i - 1]:<4}"
+            # Fixed width for alignment
+            to_track = f"Track {self.head_movement_sequence[i]:<4}"
+
+            if (self.head_movement_sequence[i - 1] > self.head_movement_sequence[i]):
+                minuend = self.head_movement_sequence[i - 1]
+                subtrahend = self.head_movement_sequence[i]
+                print(f"From {Colors.RED}{from_track}{Colors.RESET} "
+                      f"to {Colors.GREEN}{to_track}{Colors.RESET} "
+                      f"= {Colors.RED}{minuend:<3} {Colors.RESET} - {Colors.GREEN}{subtrahend:<3} {Colors.RESET} = {Colors.BLUE}{list_of_calculation[i - 1]} tracks{Colors.RESET}")
+            else:
+                minuend = self.head_movement_sequence[i]
+                subtrahend = self.head_movement_sequence[i - 1]
+                print(f"From {Colors.RED}{from_track}{Colors.RESET} "
+                      f"to {Colors.GREEN}{to_track}{Colors.RESET} "
+                      f"= {Colors.GREEN}{minuend:<3} {Colors.RESET} - {Colors.RED}{subtrahend:<3} {Colors.RESET} = {Colors.BLUE}{list_of_calculation[i - 1]} tracks{Colors.RESET}")
+
+            i += 1
+
+        print()
+        print('The total number of tracks traversed by the read/write head:')
+        blue_calculations = [f'{Colors.BLUE}{calc}{Colors.RESET}' for calc in list_of_calculation]
+        print(' + '.join(blue_calculations), end='')
+        print(f' = {Colors.BLUE}{self.total_head_movements} tracks{Colors.RESET}')
+        print('------------------------------------')
+
+
+class Colors:
+    # ANSI color codes
+    RED = '\033[91m'
+    GREEN = '\033[92m'
+    BLUE = '\033[94m'
+    RESET = '\033[0m'

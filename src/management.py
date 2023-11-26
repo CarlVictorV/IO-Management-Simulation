@@ -44,7 +44,7 @@ class IO_Algorithm:
         Simulates the FCFS Algorithm
         :return: None
         """
-        
+
         for track in self.io_request.requested_tracks:
             self.io_execution.add_head_movement(track)
 
@@ -200,7 +200,6 @@ class IO_Algorithm:
         plt.xticks(range(len(self.io_execution.head_movement_sequence)))
 
         plt.show()
-            
 
     def set_algorithm(self, algorithm):
         """
@@ -209,15 +208,14 @@ class IO_Algorithm:
         :return: None
         """
         self.io_request.algorithm = algorithm
-    
+
     def reset_execution(self):
         """
         Resets the execution
         :return: None
         """
         self.io_execution.head_movement_sequence = []
-        self.io_execution.head_movement_sequence.append(self.io_request.current_track)
+        self.io_execution.head_movement_sequence.append(
+            self.io_request.current_track)
         self.io_execution.total_head_movements = 0
         self.Queue = []
-
-        
