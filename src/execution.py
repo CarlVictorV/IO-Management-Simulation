@@ -88,9 +88,11 @@ class IO_Execution:
 
         print()
         print('The total number of tracks traversed by the read/write head:')
-        blue_calculations = [f'{Colors.BLUE}{calc}{Colors.RESET}' for calc in list_of_calculation]
+        blue_calculations = [f'{Colors.BLUE}{calc}{Colors.RESET}' for calc in list_of_calculation] #noqa
         print(' + '.join(blue_calculations), end='')
-        print(f' = {Colors.BLUE}{self.total_head_movements} tracks{Colors.RESET}')
+        print(f' = {Colors.BLUE}{self.total_head_movements} tracks{Colors.RESET}') #noqa
+        # The two lines above have noqa because whenever formatting is applied
+        # it will cause an error
         print('------------------------------------')
 
 
